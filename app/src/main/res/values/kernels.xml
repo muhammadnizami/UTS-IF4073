@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="robert">
+        <item format="float">0</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">0</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">0</item>
+        <item format="float">0</item>
+        <item format="float">0</item>
+    </array>
+    <array name="prewitt">
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+    </array>
+    <array name="sobel">
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">2</item>
+        <item format="float">0</item>
+        <item format="float">-2</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+    </array>
+    <array name="freichi">
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">1.41421356237</item>
+        <item format="float">0</item>
+        <item format="float">-1.41421356237</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+    </array>
+    <array name="prewitt8">
+        <item format="float">1</item>
+        <item format="float">1</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">-2</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">1</item>
+        <item format="float">-1</item>
+    </array>
+    <array name="kirch">
+        <item format="float">5</item>
+        <item format="float">-3</item>
+        <item format="float">-3</item>
+        <item format="float">5</item>
+        <item format="float">0</item>
+        <item format="float">-3</item>
+        <item format="float">5</item>
+        <item format="float">-3</item>
+        <item format="float">-3</item>
+    </array>
+    <array name="robinson3level">
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+    </array>
+    <array name="robinson5level">
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">2</item>
+        <item format="float">0</item>
+        <item format="float">-2</item>
+        <item format="float">1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+    </array>
+</resources>
