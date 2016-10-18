@@ -21,8 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/imageView"
-        android:layout_above="@+id/buttonAmbilGambar"
-        android:layout_toEndOf="@+id/scrollView" />
+        android:layout_above="@+id/buttonAmbilGambar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,121 +32,6 @@
         android:onClick="onButtonTerapkanMatriksKonvolusiClick"
         android:layout_alignTop="@+id/buttonAmbilGambar"
         android:layout_toEndOf="@+id/buttonAmbilGambar" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_above="@+id/buttonAmbilGambar"
-        android:layout_alignParentStart="true">
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroupKernels"
-            android:background="#abf234"
-            android:checkedButton="@+id/sound" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Derajat 0"
-                android:id="@+id/textViewDerajat0" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Homogen"
-                android:id="@+id/radioButtonHomogen"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Difference"
-                android:id="@+id/radioButtonDifference"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Derajat 1"
-                android:id="@+id/textViewDerajat1"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Robert"
-                android:id="@+id/radioButtonRobert"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prewitt"
-                android:id="@+id/radioButtonPrewitt"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sobel"
-                android:id="@+id/radioButtonSobel"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frei-Chi"
-                android:id="@+id/radioButtonFreiChi"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Derajat 2"
-                android:id="@+id/textViewDerajat2" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Prewitt-8"
-                android:id="@+id/radioButtonPrewitt8"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kirch"
-                android:id="@+id/radioButtonKirch"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Robinson 3 Level"
-                android:id="@+id/radioButtonRobinson3Level"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Robinson 5 Level"
-                android:id="@+id/radioButtonRobinson5Level"
-                android:checked="false"
-                android:onClick="onRadioButtonClicked"/>
-
-        </RadioGroup>
-    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
@@ -165,7 +49,7 @@
         android:id="@+id/checkBoxNoiseRemoval"
         android:layout_alignParentStart="true"
         android:checked="false"
-        android:layout_above="@+id/scrollView" />
+        android:layout_above="@+id/buttonAmbilGambar" />
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -174,5 +58,14 @@
         android:layout_alignParentStart="true"
         android:checked="false"
         android:layout_above="@+id/checkBoxNoiseRemoval" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="smooth"
+        android:id="@+id/checkBoxSmooth"
+        android:layout_above="@+id/checkBoxSkeletonize"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
 
 </RelativeLayout>

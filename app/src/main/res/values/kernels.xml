@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <array name="sharpenkernel">
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">5</item>
+        <item format="float">-1</item>
+        <item format="float">0</item>
+        <item format="float">-1</item>
+        <item format="float">0</item>
+    </array>
+    <array name="boxblurkernel">
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+        <item format="float">0.111111111111</item>
+    </array>
+    <array name="gaussianblurkernel">
+        <item format="float">0.0625</item>
+        <item format="float">0.125</item>
+        <item format="float">0.0625</item>
+        <item format="float">0.125</item>
+        <item format="float">0.25</item>
+        <item format="float">0.125</item>
+        <item format="float">0.0625</item>
+        <item format="float">0.125</item>
+        <item format="float">0.0625</item>
+    </array>
     <array name="robert">
         <item format="float">0</item>
         <item format="float">0</item>

@@ -5,11 +5,11 @@ package nizami_13512501.UTS;
  */
 public class ExtendedBooleanMatrix {
     private boolean[][] booleen;
-    ExtendedBooleanMatrix(boolean [][] booleen){
+    public ExtendedBooleanMatrix(boolean[][] booleen){
         this.setBooleen(booleen);
     }
 
-    boolean getPixel(int x, int y){
+    public boolean getPixel(int x, int y){
         int booleen_x = x;
         int booleen_y = y;
         if (booleen_x >= getBooleen().length)

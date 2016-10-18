@@ -19,6 +19,10 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import nizami_13512501.UTS.LetterDetect.IdealLetter;
+import nizami_13512501.UTS.LetterDetect.IdealLetterMap;
+import nizami_13512501.UTS.LetterDetect.LetterDetectorMap;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 1;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Bitmap gambarPreview;
     CheckBox checkBoxNoiseRemoval;
     CheckBox checkBoxSkeletonization;
+    CheckBox checkBoxSmooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         checkBoxNoiseRemoval = (CheckBox) findViewById(R.id.checkBoxNoiseRemoval);
         checkBoxSkeletonization = (CheckBox) findViewById(R.id.checkBoxSkeletonize);
+        checkBoxSmooth = (CheckBox) findViewById(R.id.checkBoxSmooth);
     }
 
     @Override
@@ -100,6 +106,42 @@ public class MainActivity extends AppCompatActivity {
             result[i]=ta.getFloat(i,0);
         }
         return result;
+    }
+
+    private class OperasiDetectGambar extends AsyncTask<String, Void, String>{
+
+        public OperasiDetectGambar(Bitmap input){
+            this.input = input;
+            TextView textViewProgress = (TextView) findViewById(R.id.textViewProcessing);
+            textViewProgress.setVisibility(View.VISIBLE);
+        }
+
+        Bitmap input;
+        Bitmap hasil;
+        char letter;
+        char number;
+
+        @Override
+        protected String doInBackground(String... params) {
+            int [][] grayLevel = OrphanFunctions.grayLevel(input);
+            MatriksKonvolusi matriksKonvolusi = new MatriksKonvolusi(getFloatArrayConstants(R.array.boxblurkernel));
+            grayLevel = matriksKonvolusi.eksekusi(grayLevel);
+            boolean [][] booleanImage = OrphanFunctions.createBooleanMatrixFromGrayLevelReverse(grayLevel,Otsu.otsu(grayLevel));
+            (new NoiseReduction(10)).attemptNoiseRemove(booleanImage);
+            HilditchSkeletonization.skeletonize(booleanImage);
+            hasil = OrphanFunctions.createBitmapFromBooleanMatrix(booleanImage);
+            letter = IdealLetterMap.capitalMap.detect(booleanImage);
+            number = IdealLetterMap.numberMap.detect(booleanImage);
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            previewGambarFilter(hasil);
+            Toast.makeText(getApplicationContext(),"Letter: "+letter+"\nNumber: "+number,Toast.LENGTH_SHORT).show();
+            TextView textViewProgress = (TextView) findViewById(R.id.textViewProcessing);
+            textViewProgress.setVisibility(View.INVISIBLE);
+        }
     }
 
     private class OperasiMatriksKonvolusi extends AsyncTask<String, Void, String> {
@@ -154,100 +196,10 @@ public class MainActivity extends AppCompatActivity {
 
     OperasiMatriksKonvolusi operasiMatriksKonvolusi;
 
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        float [] floatConstants = null;
-        MatriksKonvolusi matriksKonvolusi = null;
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-
-            case R.id.radioButtonDifference:
-                if (checked)
-                    matriksKonvolusi = new OperatorDifference();
-                break;
-
-            case R.id.radioButtonHomogen:
-                if (checked)
-                    matriksKonvolusi = new OperatorHomogen();
-                break;
-
-            case R.id.radioButtonPrewitt8:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.prewitt8);
-                    matriksKonvolusi = new EdgeDerajat2(floatConstants);
-                break;
-
-            case R.id.radioButtonRobert:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.robert);
-                matriksKonvolusi = new EdgeDerajat1(floatConstants);
-                break;
-
-            case R.id.radioButtonPrewitt:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.prewitt);
-                matriksKonvolusi = new EdgeDerajat1(floatConstants);
-                break;
-
-            case R.id.radioButtonSobel:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.sobel);
-                matriksKonvolusi = new EdgeDerajat1(floatConstants);
-                break;
-
-            case R.id.radioButtonFreiChi:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.freichi);
-                matriksKonvolusi = new EdgeDerajat1(floatConstants);
-                break;
-
-            case R.id.radioButtonKirch:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.kirch);
-                matriksKonvolusi = new EdgeDerajat2(floatConstants);
-                break;
-
-            case R.id.radioButtonRobinson3Level:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.robinson3level);
-                matriksKonvolusi = new EdgeDerajat2(floatConstants);
-                break;
-
-            case R.id.radioButtonRobinson5Level:
-                if (checked)
-                    floatConstants = getFloatArrayConstants(R.array.robinson5level);
-                matriksKonvolusi = new EdgeDerajat2(floatConstants);
-                break;
-        }
-
-        if (gambar != null && matriksKonvolusi != null) {
-            operasiMatriksKonvolusi = (OperasiMatriksKonvolusi) new OperasiMatriksKonvolusi(matriksKonvolusi, gambar, checkBoxNoiseRemoval.isChecked(), checkBoxSkeletonization.isChecked()).execute("");
-            System.out.println(operasiMatriksKonvolusi.getStatus());
-        }
-
-    }
-
     public void onButtonDeteksiGambarClicked(View view){
         if (gambar != null){
-            int [][] grayLevel = OrphanFunctions.grayLevel(gambar);
-            boolean [][] booleen = OrphanFunctions.createBooleanMatrixFromGrayLevel(grayLevel,128);
-            System.out.println("scanning...");
-            Integer[] chainCode = EdgeExplorer.getChainCode(booleen,booleen.length/2,0,EdgeExplorer.DIRECTION_SOUTH);
-            String message=" chain code: ";
-            for (int i=0;i<chainCode.length;i++){
-                message+=chainCode[i];
-            }
-            message+="\nbentuk: " + ShapeDetect.getNamaBentuk(chainCode);
-            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-            System.out.print("this is the chain code!");
-            for (int i=0;i<chainCode.length;i++){
-                System.out.print(""+chainCode[i]+",");
-            }
-            System.out.println();
-
+            OperasiDetectGambar operasiDetectGambar = (OperasiDetectGambar) new OperasiDetectGambar(gambar).execute();
+            System.out.println(operasiDetectGambar.getStatus());
         }
     }
 

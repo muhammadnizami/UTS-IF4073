@@ -67,6 +67,12 @@ public class OrphanFunctions {
         return gambar;
     }
 
+    /**
+     * level tinggi: true, level rendah: false
+     * @param grayLevel
+     * @param threshold
+     * @return
+     */
     public static boolean[][] createBooleanMatrixFromGrayLevel(int [][] grayLevel, int threshold){
         int width = grayLevel.length;
         boolean [][] booleen = new boolean[width][];
@@ -78,6 +84,77 @@ public class OrphanFunctions {
             }
         }
         return booleen;
+    }
+
+    /**
+     * level tinggi: false, level rendah: true
+     * @param grayLevel
+     * @param threshold
+     * @return
+     */
+    public static boolean[][] createBooleanMatrixFromGrayLevelReverse(int [][] grayLevel, int threshold){
+        int width = grayLevel.length;
+        boolean [][] booleen = new boolean[width][];
+        for (int x=0;x<width;x++){
+            int height = grayLevel[x].length;
+            booleen[x]=new boolean[height];
+            for (int y=0;y<height;y++){
+                booleen[x][y] = grayLevel[x][y] < threshold;
+            }
+        }
+        return booleen;
+    }
+
+    public static boolean[][] crop(boolean [][] image, int x, int y, int width, int height){
+        boolean [][] retval = new boolean[width][height];
+        for (int i=0;i<width;i++){
+            for (int j=0;j<height;j++){
+                retval[i][j] = image[i+x][j+y];
+            }
+        }
+        return retval;
+    }
+
+    public static int [][] crop(int[][] image, int x, int y, int width, int height){
+        int [][] retval = new int[width][height];
+        for (int i=0;i<width;i++){
+            for (int j=0;j<height;j++){
+                retval[i][j] = image[i+x][j+y];
+            }
+        }
+        return retval;
+    }
+
+    public static boolean [][] cropImageToNotBlank(boolean [][] image){
+        int min_x = image.length-1;
+        for (int y=0;y<image[0].length;y++){
+            for (int x=0;x<min_x;x++){
+                if (image[x][y])
+                    min_x=x;
+            }
+        }
+        int min_y = image[0].length-1;
+        for (int x=0;x<image.length;x++){
+            for (int y=0;y<min_y;y++){
+                if (image[x][y])
+                    min_y=y;
+            }
+        }
+        int max_x = 0;
+        for (int y=0;y<image[0].length;y++) {
+            for (int x = image.length - 1; x > max_x; x--) {
+                if (image[x][y])
+                    max_x = x;
+            }
+        }
+        int max_y = 0;
+        for (int x=0;x<image.length;x++) {
+            for (int y = image[0].length - 1; y > max_y; y--) {
+                if (image[x][y])
+                    max_y = y;
+            }
+        }
+        return OrphanFunctions.crop(image,min_x,min_y,max_x-min_x+1,max_y-min_y+1);
     }
 
 }
