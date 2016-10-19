@@ -23,8 +23,8 @@ public class Otsu {
         return sum;
     }
 
-    public static int dot(Map<Integer, Integer> hist){
-        int dot = 0;
+    public static long dot(Map<Integer, Integer> hist){
+        long dot = 0;
         for (Map.Entry<Integer,Integer> x : hist.entrySet()){
             dot+=x.getKey()*x.getValue();
         }
@@ -34,15 +34,15 @@ public class Otsu {
     public static int otsu(Map<Integer, Integer> hist){
         int total= sum(hist);
         int sumB = 0;
-        int wB = 0;
+        long wB = 0;
         double maximum = 0.0;
-        int sum1 = dot(hist);
+        long sum1 = dot(hist);
         int level = 0;
         for(Map.Entry<Integer,Integer> entry : hist.entrySet()){
             wB += entry.getValue();
             if (wB == 0)
                 continue;
-            int wF = total - wB;
+            long wF = total - wB;
             if (wF == 0)
                 break;
             sumB += (entry.getKey()-1) * entry.getValue();

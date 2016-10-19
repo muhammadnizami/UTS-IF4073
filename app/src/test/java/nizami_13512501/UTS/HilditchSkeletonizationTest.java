@@ -40,9 +40,7 @@ public class HilditchSkeletonizationTest {
             for (int j=0;j<test1Image[i].length;j++){
                 if (test1Image[i][j])
                     num++;
-                System.out.print("\t"+test1Image[i][j]);
             }
-            System.out.println();
             Assert.assertTrue(num<=1);
         }
         for (int i=2;i<7;i++){

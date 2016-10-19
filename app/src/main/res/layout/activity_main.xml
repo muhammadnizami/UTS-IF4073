@@ -20,8 +20,9 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:layout_above="@+id/buttonAmbilGambar" />
+        android:id="@+id/imageView1"
+        android:layout_above="@+id/textViewProcessing"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
         android:id="@+id/textViewProcessing"
         android:visibility="invisible"
         android:onClick="onButtonTerapkanMatriksKonvolusiClick"
-        android:layout_alignTop="@+id/buttonAmbilGambar"
+        android:layout_above="@+id/buttonAmbilGambar"
         android:layout_toEndOf="@+id/buttonAmbilGambar" />
 
     <Button
@@ -38,34 +39,15 @@
         android:layout_height="wrap_content"
         android:text="Deteksi Gambar"
         android:id="@+id/buttonDeteksiGambar"
-        android:layout_below="@+id/textViewProcessing"
-        android:layout_toEndOf="@+id/buttonAmbilGambar"
-        android:onClick="onButtonDeteksiGambarClicked" />
+        android:onClick="onButtonDeteksiGambarClicked"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/buttonAmbilGambar" />
 
-    <CheckBox
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Noise Removal"
-        android:id="@+id/checkBoxNoiseRemoval"
-        android:layout_alignParentStart="true"
-        android:checked="false"
-        android:layout_above="@+id/buttonAmbilGambar" />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Skeletonize"
-        android:id="@+id/checkBoxSkeletonize"
-        android:layout_alignParentStart="true"
-        android:checked="false"
-        android:layout_above="@+id/checkBoxNoiseRemoval" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="smooth"
-        android:id="@+id/checkBoxSmooth"
-        android:layout_above="@+id/checkBoxSkeletonize"
-        android:layout_alignParentStart="true"
-        android:checked="false" />
+        android:id="@+id/imageView2"
+        android:layout_alignBottom="@+id/buttonDeteksiGambar"
+        android:layout_toEndOf="@+id/buttonDeteksiGambar" />
 
 </RelativeLayout>

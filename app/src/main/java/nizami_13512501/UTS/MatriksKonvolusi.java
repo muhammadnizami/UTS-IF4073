@@ -17,9 +17,7 @@ public class MatriksKonvolusi {
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
                 matriksKonvolusi[i][j] = floatArrayConstants[3*i+j];
-                System.out.print(matriksKonvolusi[i][j]);
             }
-            System.out.println();
         }
     }
 

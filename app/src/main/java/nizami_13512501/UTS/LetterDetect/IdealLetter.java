@@ -1,5 +1,6 @@
 package nizami_13512501.UTS.LetterDetect;
 
+import nizami_13512501.UTS.CropFrame;
 import nizami_13512501.UTS.ExtendedBooleanMatrix;
 import nizami_13512501.UTS.OrphanFunctions;
 
@@ -46,7 +47,8 @@ public class IdealLetter {
                     max_y = y;
             }
         }
-        return OrphanFunctions.crop(letter,min_x,min_y,max_x-min_x+1,max_y-min_y+1);
+        CropFrame cropFrame = new CropFrame(min_x,min_y,max_x-min_x+1,max_y-min_y+1);
+        return cropFrame.crop(letter);
     }
 
     public double error(boolean [][] letter){

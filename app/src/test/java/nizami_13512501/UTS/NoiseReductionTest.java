@@ -18,11 +18,6 @@ public class NoiseReductionTest {
                 {false,false,false,false,false}
         };
         (new NoiseReduction(4)).attemptNoiseRemove(test1Image);
-        for (int i=0;i<5;i++){
-            for (int j=0;j<5;j++)
-                System.out.print("\t"+ test1Image[i][j]);
-            System.out.println();
-        }
         for (boolean[] barr : test1Image){
             for (boolean b : barr){
                 assertFalse(b);
